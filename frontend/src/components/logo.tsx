@@ -60,11 +60,11 @@ export function Logo({ size = "md", href = "/", className, variant = "auto" }: L
 
   const content = (
     <span
-      className={clsx("tracking-[-0.01em]", sizes[size], className)}
+      className={clsx("tracking-[-0.01em] italic", sizes[size], className)}
       style={{ fontFamily: "var(--font-instrument)" }}
     >
       <span className={baseColors[variant]}>ad</span>
-      <span className="text-indigo-500 italic">minds</span>
+      <span className="text-indigo-500">minds</span>
     </span>
   );
 
