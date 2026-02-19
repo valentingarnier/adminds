@@ -68,12 +68,12 @@ export default function TimeComparison() {
         </p>
         <p className="mt-3 text-sm text-zinc-400">
           Chaque heure passée sur l&apos;administratif est une heure en moins
-          pour vos patients. Admind vous rend ce temps.
+          pour vos patients. Adminds vous rend ce temps.
         </p>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-        {/* WITHOUT Admind */}
+        {/* WITHOUT Adminds */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -117,7 +117,7 @@ export default function TimeComparison() {
           </div>
         </motion.div>
 
-        {/* WITH Admind */}
+        {/* WITH Adminds */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -131,7 +131,7 @@ export default function TimeComparison() {
               </svg>
             </div>
             <div>
-              <div className="text-sm font-semibold text-zinc-900">Avec Admind</div>
+              <div className="text-sm font-semibold text-zinc-900">Avec Adminds</div>
               <div className="text-xs text-indigo-600 font-medium">~20 minutes par rapport</div>
             </div>
           </div>

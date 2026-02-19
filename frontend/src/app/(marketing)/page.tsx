@@ -30,7 +30,7 @@ const FEATURES = [
   {
     title: "Vos constats, structurés",
     description:
-      "Admind n'invente rien. Il prend vos notes cliniques et les organise dans le cadre juridique exigé par le formulaire cantonal.",
+      "Adminds n'invente rien. Il prend vos notes cliniques et les organise dans le cadre juridique exigé par le formulaire cantonal.",
   },
 ];
 
@@ -81,7 +81,7 @@ export default function LandingPage() {
               En quelques minutes.
             </h1>
             <p className="mt-6 text-base sm:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-              Admind aide les psychiatres à rédiger des rapports d&apos;assurance
+              Adminds aide les psychiatres à rédiger des rapports d&apos;assurance
               invalidité conformes aux exigences cantonales — structurés,
               juridiquement valides, et prêts à soumettre.
             </p>
@@ -166,7 +166,7 @@ export default function LandingPage() {
                 number: "02",
                 title: "L'IA génère le rapport",
                 description:
-                  "Admind analyse le dossier et remplit chaque section du formulaire cantonal en respectant les critères de Foerster.",
+                  "Adminds analyse le dossier et remplit chaque section du formulaire cantonal en respectant les critères de Foerster.",
                 icon: (
                   <path
                     strokeLinecap="round"
@@ -320,7 +320,7 @@ export default function LandingPage() {
             Construisons-le ensemble.
           </h2>
           <p className="mt-4 text-zinc-500 leading-relaxed">
-            Nous cherchons des psychiatres pour co-développer Admind.
+            Nous cherchons des psychiatres pour co-développer Adminds.
             Les places sont limitées — rejoignez la bêta gratuitement et
             testez l&apos;outil sur vos propres rapports. Vos retours
             façonneront le produit.
@@ -358,7 +358,7 @@ export default function LandingPage() {
               Conditions
             </a>
             <a
-              href="mailto:contact@admind.ch"
+              href="mailto:contact@adminds.ch"
               className="text-sm text-zinc-400 hover:text-zinc-600 transition-colors"
             >
               Contact

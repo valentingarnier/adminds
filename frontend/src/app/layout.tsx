@@ -22,8 +22,8 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Admind — AI-Powered Medical Reports",
-    template: "%s | Admind",
+    default: "Adminds — AI-Powered Medical Reports",
+    template: "%s | Adminds",
   },
   description:
     "Write disability insurance reports in minutes, not hours. AI-powered, legally compliant, medically precise.",

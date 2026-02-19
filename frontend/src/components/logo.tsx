@@ -44,7 +44,7 @@ export function LogoFavicon({ className }: { className?: string }) {
   );
 }
 
-/** Wordmark logo — Instrument Serif: "ad" dark + italic "mind" in brand purple */
+/** Wordmark logo — Instrument Serif: "ad" dark + italic "minds" in brand purple */
 export function Logo({ size = "md", href = "/", className, variant = "auto" }: LogoProps) {
   const sizes = {
     sm: "text-lg",
@@ -64,7 +64,7 @@ export function Logo({ size = "md", href = "/", className, variant = "auto" }: L
       style={{ fontFamily: "var(--font-instrument)" }}
     >
       <span className={baseColors[variant]}>ad</span>
-      <span className="text-indigo-500 italic">mind</span>
+      <span className="text-indigo-500 italic">minds</span>
     </span>
   );
 
