@@ -22,11 +22,11 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Adminds — AI-Powered Medical Reports",
+    default: "Adminds — Rapports médicaux assistés par IA",
     template: "%s | Adminds",
   },
   description:
-    "Write disability insurance reports in minutes, not hours. AI-powered, legally compliant, medically precise.",
+    "Rédigez vos rapports d'assurance invalidité en minutes, pas en heures. Assisté par IA, conforme au droit, médicalement précis.",
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmSerif.variable} ${instrumentSerif.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${dmSerif.variable} ${instrumentSerif.variable}`}>
       <body className="antialiased">
         {children}
       </body>
