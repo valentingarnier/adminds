@@ -52,19 +52,13 @@ export function Logo({ size = "md", href = "/", className, variant = "auto" }: L
     lg: "text-3xl",
   };
 
-  const baseColors = {
-    light: "text-zinc-900",
-    dark: "text-white",
-    auto: "text-zinc-900 dark:text-white",
-  };
-
   const content = (
     <span
       className={clsx("tracking-[-0.01em] italic", sizes[size], className)}
       style={{ fontFamily: "var(--font-instrument)" }}
     >
-      <span className={baseColors[variant]}>ad</span>
-      <span className="text-indigo-500">minds</span>
+      <span style={{ color: variant === "dark" ? "white" : "black" }}>ad</span>
+      <span className="text-indigo-600">minds</span>
     </span>
   );
 
