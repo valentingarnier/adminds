@@ -1,0 +1,16 @@
+{
+  "memory": {
+    "product": "Admind — AI-powered disability insurance report writer for psychiatrists in Switzerland",
+    "stage": "Customer discovery with 5-10 psychiatrists in Geneva as beta design partners",
+    "target_users": "Psychiatrists in Geneva writing psychiatric AI (Assurance Invalidité) reports",
+    "key_domain_terms": {
+      "rapports_AI": "Disability insurance reports for Assurance Invalidité",
+      "Foerster_criteria": "Federal Tribunal case law criteria for psychiatric disability assessments",
+      "structured_assessment_indicators": "Standardized framework for evaluating disability claims",
+      "SUVA_LAA": "Swiss accident insurance (future expansion)",
+      "cantonal_AI_offices": "Regional disability insurance offices that issue standardized forms"
+    },
+    "vision": "Platform for compliant medico-legal documentation across report types, specialties, and European markets",
+    "tech_stack": "Next.js 16 + FastAPI + Supabase + Stripe"
+  }
+}

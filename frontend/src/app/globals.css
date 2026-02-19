@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans--font-feature-settings: "cv11";
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-instrument: var(--font-instrument), "Instrument Serif", Georgia, serif;
+
+  /* Brand purple palette — base #7C5CBA */
+  --color-indigo-50: #f7f4fb;
+  --color-indigo-100: #ede7f6;
+  --color-indigo-200: #d9cdef;
+  --color-indigo-300: #beaade;
+  --color-indigo-400: #9e82cc;
+  --color-indigo-500: #7C5CBA;
+  --color-indigo-600: #6849a0;
+  --color-indigo-700: #543986;
+  --color-indigo-800: #412b6a;
+  --color-indigo-900: #2e1e4d;
+  --color-indigo-950: #1b1130;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(124, 92, 186, 0.2);
+  color: inherit;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #7C5CBA 0%, #6849a0 50%, #543986 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* Mockup window chrome — light theme */
+.mockup-window {
+  background: #FFFFFF;
+  border: 1px solid #E4E4E7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.mockup-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #F4F4F5;
+  background: #FAFAFA;
+}
+
+.mockup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
