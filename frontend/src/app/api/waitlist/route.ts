@@ -11,12 +11,26 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email requis" }, { status: 400 });
     }
 
-    await resend.emails.send({
-      from: "Adminds <onboarding@resend.dev>",
-      to: "contact@adminds.ch",
-      subject: `Nouvelle inscription waitlist — ${email}`,
-      text: `Nouvelle inscription sur la waitlist :\n\nEmail : ${email}\nDate : ${new Date().toLocaleString("fr-CH")}`,
-    });
+    const date = new Date().toLocaleString("fr-CH");
+
+    await Promise.all([
+      resend.emails.send({
+        from: "Adminds Website <hello@yourclaw.dev>",
+        to: "contact@adminds.ch",
+        subject: `Nouvelle inscription — ${email}`,
+        text: `Nouvelle inscription :\n\nEmail : ${email}\nDate : ${date}`,
+      }),
+
+      process.env.SLACK_WEBHOOK_URL
+        ? fetch(process.env.SLACK_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: `📩 Nouvelle inscription sur le site web : ${email} (${date})`,
+            }),
+          })
+        : Promise.resolve(),
+    ]);
 
     return NextResponse.json({ ok: true });
   } catch {
