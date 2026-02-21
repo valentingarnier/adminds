@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 const CALENDLY_URL = "https://calendly.com/contact-adminds/30min";
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -34,7 +33,7 @@ export default function CalendlyEmbed() {
 
     setState("loading");
     try {
-      const res = await fetch(`${API_URL}/api/v1/waitlist`, {
+      const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

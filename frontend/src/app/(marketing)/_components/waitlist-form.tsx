@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-
 type FormState = "idle" | "loading" | "success" | "error";
 
 export default function WaitlistForm() {
@@ -17,7 +15,7 @@ export default function WaitlistForm() {
 
     setState("loading");
     try {
-      const res = await fetch(`${API_URL}/api/v1/waitlist`, {
+      const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

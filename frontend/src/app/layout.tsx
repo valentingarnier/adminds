@@ -23,11 +23,37 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Adminds — Rapports médicaux assistés par IA",
+    default: "Adminds — Rapports AI psychiatriques assistés par IA",
     template: "%s | Adminds",
   },
   description:
-    "Rédigez vos rapports d'assurance invalidité en minutes, pas en heures. Assisté par IA, conforme au droit, médicalement précis.",
+    "Psychiatres en Suisse : participez à la création d'un outil IA qui rédige vos rapports AI en minutes. Rejoignez nos co-créateurs et façonnez le produit qui vous manque.",
+  keywords: [
+    "psychiatre",
+    "rapport assurance invalidité",
+    "rapport AI",
+    "IA médicale",
+    "administratif médical",
+    "Suisse",
+    "Genève",
+    "outil psychiatre",
+    "rapports médico-légaux",
+  ],
+  openGraph: {
+    title: "Psychiatres, co-construisez l'outil qui réinvente votre quotidien",
+    description:
+      "Rapports AI, ordonnances, correspondance… vous passez trop de temps sur l'administratif. Participez à la création d'Adminds et façonnez le produit.",
+    url: "https://www.adminds.ch",
+    siteName: "Adminds",
+    locale: "fr_CH",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Psychiatres, co-construisez l'outil qui réinvente votre quotidien",
+    description:
+      "Participez à la création d'un outil IA pour rédiger vos rapports d'assurance invalidité en minutes.",
+  },
 };
 
 export default function RootLayout({
