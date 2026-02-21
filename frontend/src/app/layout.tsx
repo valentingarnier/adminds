@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, DM_Serif_Display, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,6 +37,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${inter.variable} ${dmSerif.variable} ${instrumentSerif.variable}`}>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-EM2F3EN3LV"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EM2F3EN3LV');
+        `}
+      </Script>
       <body className="antialiased">
         {children}
       </body>
