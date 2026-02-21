@@ -92,32 +92,79 @@ export default function ReportMockup() {
         <div className="mockup-dot bg-zinc-200" />
         <div className="mockup-dot bg-zinc-200" />
         <div className="ml-3 flex items-baseline gap-2">
-          <span className="text-xs text-zinc-500 font-medium">Dr. N. Berset</span>
-          <span className="text-[10px] text-zinc-300">·</span>
-          <span className="text-[10px] text-zinc-400">Canton de Genève</span>
+          <span className="text-[10px] sm:text-xs text-zinc-500 font-medium">Dr. N. Berset</span>
+          <span className="text-[10px] text-zinc-300 hidden sm:inline">·</span>
+          <span className="text-[10px] text-zinc-400 hidden sm:inline">Canton de Genève</span>
         </div>
         {phase === "done" && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="ml-auto flex items-center gap-2"
+            className="ml-auto flex items-center gap-1.5 sm:gap-2"
           >
-            <div className="flex items-center gap-1.5 text-[10px] text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+            <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] text-emerald-600 bg-emerald-50 border border-emerald-200 px-1.5 sm:px-2 py-0.5 rounded-full">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Rapport prêt
+              <span className="hidden sm:inline">Rapport prêt</span>
+              <span className="sm:hidden">Prêt</span>
             </div>
-            <div className="flex items-center gap-1 text-[10px] text-indigo-600 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full font-medium cursor-pointer hover:bg-indigo-100 transition-colors">
+            <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-indigo-600 bg-indigo-50 border border-indigo-200 px-1.5 sm:px-2.5 py-0.5 rounded-full font-medium cursor-pointer hover:bg-indigo-100 transition-colors">
               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>
-              Télécharger
+              <span className="hidden sm:inline">Télécharger</span>
             </div>
           </motion.div>
         )}
       </div>
 
-      <div className="flex min-h-[380px] sm:min-h-[420px]">
-        {/* Sidebar */}
+      {/* Mobile compact bar — files + sections progress */}
+      <div className="sm:hidden border-b border-zinc-100 bg-zinc-50/50 px-3 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 text-[10px] text-zinc-400">
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              3 fichiers
+            </div>
+            <div className="flex items-center gap-1.5">
+              {RAPPORT_SECTIONS.map((section, i) => (
+                <div
+                  key={section.id}
+                  className={`w-5 h-5 rounded text-[8px] font-bold flex items-center justify-center transition-colors duration-300 ${
+                    i < visibleSections && i !== typingIndex
+                      ? "bg-emerald-100 text-emerald-700"
+                      : i === typingIndex
+                        ? "bg-indigo-100 text-indigo-700"
+                        : "bg-zinc-100 text-zinc-400"
+                  }`}
+                >
+                  {i < visibleSections && i !== typingIndex ? (
+                    <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                  ) : (
+                    section.number
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          <span className="text-[10px] font-mono text-zinc-400">
+            {Math.round((visibleSections / RAPPORT_SECTIONS.length) * 100)}%
+          </span>
+        </div>
+        <div className="h-0.5 bg-zinc-200 rounded-full overflow-hidden mt-1.5">
+          <motion.div
+            className="h-full bg-indigo-500 rounded-full"
+            animate={{ width: `${(visibleSections / RAPPORT_SECTIONS.length) * 100}%` }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+      </div>
+
+      <div className="flex min-h-[280px] sm:min-h-[420px]">
+        {/* Sidebar — desktop only */}
         <div className="hidden sm:flex flex-col w-52 border-r border-zinc-100 p-3 gap-1 shrink-0 bg-zinc-50/50">
           <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-2 px-2 font-medium">
             Dossier patient
@@ -195,7 +242,7 @@ export default function ReportMockup() {
         </div>
 
         {/* Main content area */}
-        <div className="flex-1 p-4 sm:p-5 overflow-hidden">
+        <div className="flex-1 p-3 sm:p-5 overflow-hidden">
           {/* Upload / Generate state */}
           {phase === "upload" && (
             <motion.div
@@ -204,7 +251,7 @@ export default function ReportMockup() {
               exit={{ opacity: 0 }}
               className="flex flex-col items-center justify-center h-full gap-4"
             >
-              <div className="w-full max-w-xs border-2 border-dashed border-zinc-200 rounded-xl p-6 text-center">
+              <div className="w-full max-w-xs border-2 border-dashed border-zinc-200 rounded-xl p-4 sm:p-6 text-center">
                 <svg className="w-8 h-8 text-zinc-300 mx-auto mb-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>
