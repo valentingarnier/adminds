@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ReportMockup from "./_components/report-mockup";
 import AdminBurden from "./_components/admin-burden";
 import CalendlyEmbed from "./_components/calendly-embed";
@@ -6,6 +7,7 @@ import { Logo } from "@/components/logo";
 const NAV_LINKS = [
   { href: "#probleme", label: "Le problème" },
   { href: "#exemple", label: "Un exemple" },
+  { href: "#equipe", label: "L'équipe" },
   { href: "#participer", label: "Participer" },
 ];
 
@@ -149,10 +151,76 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Thread: example → participate */}
-      <ThreadConnector step={3} className="bg-zinc-50/50" />
+      {/* Thread: example → team */}
+      <ThreadConnector step={3} />
 
-      {/* 4. Participer — Calendly CTA */}
+      {/* 4. L'équipe — Who are we */}
+      <section id="equipe" className="py-20 sm:py-28 px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <div className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-3">
+              L&apos;équipe
+            </div>
+            <h2
+              className="text-3xl sm:text-4xl font-normal tracking-tight text-zinc-900"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              Qui sommes-nous<span className="text-zinc-400">&nbsp;?</span>
+            </h2>
+            <p className="mt-4 text-zinc-500 max-w-2xl mx-auto leading-relaxed">
+              Une équipe à l&apos;intersection de la santé et de la technologie,
+              déterminée à simplifier le quotidien des médecins.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-10 max-w-3xl mx-auto">
+            {/* Chiara */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-36 h-36 rounded-full overflow-hidden mb-5 ring-2 ring-indigo-100 ring-offset-4">
+                <Image
+                  src="/chiara.png"
+                  alt="Chiara"
+                  width={144}
+                  height={144}
+                  className="w-full h-full object-cover grayscale"
+                />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900">Chiara</h3>
+              <p className="text-sm font-medium text-indigo-600 mb-3">Product Manager</p>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Product Manager chez Docplanner, la plus grande plateforme
+                de santé en ligne en Europe. Elle a passé des années à concevoir
+                des outils numériques pour les professionnels de santé et comprend
+                intimement leurs contraintes au quotidien.
+              </p>
+            </div>
+            {/* Valentin */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-36 h-36 rounded-full overflow-hidden mb-5 ring-2 ring-indigo-100 ring-offset-4">
+                <Image
+                  src="/valentin2.png"
+                  alt="Valentin"
+                  width={288}
+                  height={288}
+                  className="w-full h-full object-cover object-center grayscale"
+                />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900">Valentin</h3>
+              <p className="text-sm font-medium text-indigo-600 mb-3">Ingénieur IA</p>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Ingénieur en intelligence artificielle spécialisé dans le développement
+                de solutions IA pour le secteur médical. Il conçoit des systèmes
+                qui transforment des processus cliniques complexes en workflows
+                simples, fiables et conformes aux exigences réglementaires.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Thread: team → participate */}
+      <ThreadConnector step={4} className="bg-zinc-50/50" />
+
+      {/* 5. Participer — Calendly CTA */}
       <section id="participer" className="pt-10 sm:pt-14 pb-20 sm:pb-28 px-6 bg-zinc-50/50">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
