@@ -1,5 +1,5 @@
 {
-  "name": "my-saas-app",
+  "name": "adminds",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,16 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/localizations": "^4.0.0",
+    "@clerk/nextjs": "^7.0.1",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
-    "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.95.3",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
     "motion": "^12.33.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "resend": "^6.9.2"
+    "resend": "^6.9.2",
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

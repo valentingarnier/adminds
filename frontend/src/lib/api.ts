@@ -1,23 +1,10 @@
-import { createClient } from "@/lib/supabase/client";
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 async function getAuthHeaders(): Promise<HeadersInit> {
-  const supabase = createClient();
-
-  let { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
-    const { data: { session: refreshedSession } } = await supabase.auth.refreshSession();
-    session = refreshedSession;
-  }
-
-  if (!session?.access_token) {
-    throw new Error("Not authenticated");
-  }
-
+  // Clerk exposes getToken() via useAuth hook on client side
+  // For server components, use auth() from @clerk/nextjs/server
+  // This will be wired up when Clerk is installed
   return {
-    Authorization: `Bearer ${session.access_token}`,
     "Content-Type": "application/json",
   };
 }

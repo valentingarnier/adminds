@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adminds Logo Export</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: white;
+    }
+    .logo {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      padding: 40px 60px;
+    }
+    .logo-sm { font-size: 24px; }
+    .logo-md { font-size: 44px; }
+    .logo-lg { font-size: 80px; }
+    .logo-xl { font-size: 120px; }
+    .logo .ad { color: #000; }
+    .logo .minds { color: #6849a0; }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .label {
+      font-family: system-ui;
+      font-style: normal;
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <div class="label">Large (recommended for export — right-click → Save image as…)</div>
+      <div class="logo logo-xl">
+        <span class="ad">ad</span><span class="minds">minds</span>
+      </div>
+    </div>
+    <div>
+      <div class="label">Medium</div>
+      <div class="logo logo-lg">
+        <span class="ad">ad</span><span class="minds">minds</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, DM_Serif_Display, Instrument_Serif } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { frFR } from "@clerk/localizations";
 import Script from "next/script";
 import "./globals.css";
 
@@ -77,7 +79,9 @@ export default function RootLayout({
         `}
       </Script>
       <body className="antialiased">
-        {children}
+        <ClerkProvider localization={frFR}>
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );
