@@ -47,12 +47,20 @@ export default function LandingPage() {
               </a>
             ))}
           </nav>
-          <a
-            href="#participer"
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-semibold transition-colors"
-          >
-            Réserver un appel
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="/sign-in"
+              className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+            >
+              Se connecter
+            </a>
+            <a
+              href="#participer"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-semibold transition-colors"
+            >
+              Réserver un appel
+            </a>
+          </div>
         </div>
       </header>
 
