@@ -36,7 +36,33 @@ app/
   services/
     email.py       — Resend email client
     encryption.py  — Fernet encryption helper
+    docx_filler.py         — Fribourg .docx template filler (python-docx + lxml)
+    docx_filler_geneve.py  — Geneva .docx template filler
+    fribourg_field_map.py  — 100+ field definitions for Fribourg template (767 lines)
+    geneve_field_map.py    — 18 field definitions for Geneva template (249 lines)
 ```
+
+## DOCX Template Filling Services
+
+### Architecture
+- Input: `dict[str, Any]` with field IDs as keys → Output: filled `.docx` as `bytes`
+- Uses `python-docx` + `lxml` for low-level Word XML manipulation
+- Helper functions: `_set_form_field_text()`, `_check_checkbox()`, `_fill_select_one()`, `_add_text_to_cell()`, `_replace_cell_label()`
+
+### Fribourg Template (`docx_filler.py`, 258 lines)
+- Complex form: 55 fldChar-based form fields + table cells across 6 sections
+- Field types: TEXT, DATE, CHECKBOX, SELECT_ONE, CHOICE
+- Sections: Stade, Informations, General info (incapacity table), Medical situation, Professional situation, Readaptation
+- Psychiatric assessment tables (A–D): obstacles, cognitive capacities, possible activities, work rhythm
+
+### Geneva Template (`docx_filler_geneve.py`, 101 lines)
+- Simpler: 4 header form fields + 14 single-cell answer tables
+- Header: patient name, DOB, AVS number, doctor name
+- 14 questions covering anamnesis through work capacity
+
+### Field Maps
+- `fribourg_field_map.py`: `FormField`, `TableCell`, `HeaderLabel` dataclasses; `CHOICE_COLUMNS` mapping; `get_ai_prompt_schema()` for AI prompt construction
+- `geneve_field_map.py`: `FormField` + `AnswerTable` dataclasses with field indices
 
 ## Target Architecture (services to build)
 ```

@@ -9,7 +9,7 @@
 - Doctors are poorly compensated for this work
 
 ## Target Users
-- **Initial**: Psychiatrists in Geneva writing psychiatric AI reports
+- **Initial**: Psychiatrists in Geneva and Fribourg writing psychiatric AI reports
 - **Stage**: Customer discovery with 5-10 psychiatrists as beta design partners
 
 ## Vision (Venture-Scale)
