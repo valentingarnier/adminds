@@ -220,6 +220,88 @@ export const MOCK_REPORT_SECTIONS: Record<string, ReportSection[]> = {
   ],
 };
 
+// --- Editable report fields matching Fribourg docx template ---
+// Mirrors the sections from backend/app/services/fribourg_field_map.py
+
+export interface ReportField {
+  id: string;
+  label: string;
+  value: string;
+  type: "text" | "date" | "multiline";
+}
+
+export interface ReportFieldSection {
+  id: string;
+  title: string;
+  fields: ReportField[];
+}
+
+// Mock filled values matching the Fribourg template structure
+export const MOCK_FRIBOURG_FIELDS: ReportFieldSection[] = [
+  {
+    id: "1_informations_generales",
+    title: "1. Informations générales",
+    fields: [
+      { id: "date_derniere_consultation", label: "Date de la dernière consultation", value: "08.03.2026", type: "date" },
+      { id: "consultations_precedentes_par", label: "Consultations effectuées précédemment par", value: "Dr Weber, psychiatre FMH, Fribourg", type: "text" },
+      { id: "consultations_ulterieures_par", label: "Consultations effectuées à une date ultérieure par", value: "", type: "text" },
+      { id: "frequence_consultations", label: "Fréquence des consultations", value: "1x/semaine", type: "text" },
+      { id: "incapacite_pct_1", label: "Incapacité de travail — ligne 1 (%)", value: "100%", type: "text" },
+      { id: "incapacite_du_1", label: "Incapacité de travail — ligne 1 (du)", value: "15.11.2025", type: "date" },
+      { id: "incapacite_au_1", label: "Incapacité de travail — ligne 1 (au)", value: "15.02.2026", type: "date" },
+      { id: "incapacite_pct_2", label: "Incapacité de travail — ligne 2 (%)", value: "50%", type: "text" },
+      { id: "incapacite_du_2", label: "Incapacité de travail — ligne 2 (du)", value: "16.02.2026", type: "date" },
+      { id: "incapacite_au_2", label: "Incapacité de travail — ligne 2 (au)", value: "indéterminé", type: "text" },
+      { id: "activites_incapacite", label: "Pour quelles activités avez-vous attesté une incapacité de travail ?", value: "Activité habituelle d'assistante administrative à 100%", type: "text" },
+      { id: "autres_intervenants", label: "Autres intervenants (médecins, hôpitaux, thérapeutes)", value: "Mme Schneider, psychologue FSP — psychothérapie cognitivo-comportementale hebdomadaire", type: "text" },
+    ],
+  },
+  {
+    id: "2_situation_medicale",
+    title: "2. Situation médicale",
+    fields: [
+      { id: "antecedents_evolution", label: "Antécédents médicaux et évolution", value: "Trouble dépressif récurrent diagnostiqué en 2018, traité initialement par psychothérapie ambulatoire. Épisode dépressif majeur en novembre 2025 entraînant un arrêt de travail complet. Dégradation progressive depuis septembre 2025 avec difficultés de concentration croissantes, fatigue invalidante et troubles du sommeil.", type: "multiline" },
+      { id: "situation_symptomes_actuels", label: "Situation et symptômes médicaux actuels", value: "Thymie abaissée, affect restreint, anhédonie marquée. Sommeil perturbé avec réveils précoces vers 4h. Appétit diminué, perte de poids de 4 kg en 3 mois. Concentration significativement réduite. Pas d'idéation suicidaire active ni de symptômes psychotiques.", type: "multiline" },
+      { id: "medication_actuelle", label: "Médication actuelle (y compris le dosage)", value: "Sertraline 100mg/jour", type: "text" },
+      { id: "constats_medicaux", label: "Constats médicaux (examens pratiqués)", value: "Patiente orientée dans les trois sphères. Contact adéquat mais ralenti. Discours cohérent, débit légèrement diminué. Bilan neuropsychologique (2025) confirmant déficit attentionnel et fatigabilité cognitive.", type: "multiline" },
+      { id: "diagnostics_pertinents", label: "Diagnostics pertinents pour l'AI (codes CIM)", value: "F33.1 — Trouble dépressif récurrent, épisode actuel moyen\nF51.0 — Insomnie non organique", type: "multiline" },
+      { id: "diagnostics_non_pertinents", label: "Diagnostics sans influence sur la capacité de travail", value: "Aucun", type: "text" },
+      { id: "pronostic_capacite_travail", label: "Pronostic sur la capacité de travail", value: "Réservé à moyen terme (6-12 mois). Dépend de la réponse au traitement antidépresseur et de la poursuite de la psychothérapie. Réévaluation recommandée dans 6 mois.", type: "multiline" },
+      { id: "plan_traitement", label: "Prochaines mesures / plan de traitement", value: "Poursuite Sertraline 100mg/j, psychothérapie hebdomadaire TCC. Évaluation d'un ajustement médicamenteux si pas d'amélioration dans 2 mois. Reprise progressive du travail à 50% envisagée.", type: "multiline" },
+    ],
+  },
+  {
+    id: "3_situation_professionnelle",
+    title: "3. Situation professionnelle",
+    fields: [
+      { id: "activite_actuelle", label: "Activité actuelle du patient", value: "Assistante administrative chez Fiduciaire Romande SA, taux 100%. En arrêt de travail complet depuis le 15.11.2025, reprise à 50% depuis le 16.02.2026.", type: "text" },
+      { id: "situation_professionnelle_info", label: "Situation professionnelle avant l'atteinte", value: "Assistante administrative à 100% depuis 2012, fonctionnement satisfaisant jusqu'en septembre 2025.", type: "text" },
+      { id: "exigences_activite", label: "Exigences de l'activité professionnelle", value: "Travail de bureau, rédaction de courriers, gestion de dossiers, contact téléphonique avec la clientèle, utilisation de logiciels comptables.", type: "text" },
+      { id: "limitations_fonctionnelles", label: "Limitations fonctionnelles", value: "Concentration réduite (< 20 min sur tâche cognitive), fatigabilité accrue, difficultés relationnelles avec la hiérarchie, hypersensibilité au stress, difficultés de planification.", type: "multiline" },
+      { id: "ressources_patient", label: "Ressources du patient", value: "Bonne compliance thérapeutique, motivation pour la reprise, bon fonctionnement prémorbide, soutien familial présent.", type: "text" },
+      { id: "capacite_conduire", label: "Doutes quant à la capacité de conduire", value: "Pas de doute", type: "text" },
+      { id: "heures_travail_activite_habituelle", label: "Heures de travail/jour dans l'activité habituelle", value: "4h/jour (50%). Pas de tâches nécessitant une concentration soutenue, pas de pression temporelle excessive, environnement calme.", type: "text" },
+      { id: "heures_travail_activite_adaptee", label: "Heures de travail/jour dans une activité adaptée", value: "5-6h/jour (60-70%). Activité sans exigence cognitive élevée, avec possibilité de pauses régulières.", type: "text" },
+    ],
+  },
+  {
+    id: "4_potentiel_readaptation",
+    title: "4. Potentiel de réadaptation",
+    fields: [
+      { id: "pronostic_readaptation", label: "Pronostic sur le potentiel de réadaptation", value: "Favorable sous réserve de la poursuite du traitement. Capacité de travail susceptible d'augmenter progressivement sur 6-12 mois.", type: "multiline" },
+      { id: "obstacles_readaptation", label: "Facteurs faisant obstacle à une réadaptation", value: "Récurrence du trouble dépressif, persistance des troubles du sommeil malgré le traitement, durée de l'épisode actuel.", type: "multiline" },
+      { id: "limitations_vie_quotidienne", label: "Limitations dans les activités de la vie quotidienne", value: "Difficultés modérées pour le ménage et les courses (fatigabilité). Soins corporels et déplacements préservés. Repas simples possibles.", type: "multiline" },
+    ],
+  },
+  {
+    id: "divers",
+    title: "5. Divers",
+    fields: [
+      { id: "divers", label: "Autres éléments à signaler", value: "Aucune information complémentaire à signaler.", type: "text" },
+    ],
+  },
+];
+
 // The 3 rapport types available for each patient
 export const REPORT_TYPES: ReportType[] = [
   {
@@ -239,5 +321,141 @@ export const REPORT_TYPES: ReportType[] = [
     name: "Rapport perte de gain",
     description: "Rapport d'évaluation de la perte de gain",
     icon: TrendingDown,
+  },
+];
+
+// --- Wizard: Extracted information from documents (Step 2 mock) ---
+
+export type Canton = "geneve" | "fribourg";
+
+export const CANTONS: { value: Canton; label: string }[] = [
+  { value: "fribourg", label: "Fribourg" },
+  { value: "geneve", label: "Genève" },
+];
+
+// Categories for uploaded documents in the wizard
+export type DocCategory = "dpi-smeex" | "antecedents" | "rapports-medicaux" | "imagerie" | "autre";
+
+export const DOC_CATEGORY_LABELS: Record<DocCategory, string> = {
+  "dpi-smeex": "DPI (SMEEX)",
+  antecedents: "Antécédents",
+  "rapports-medicaux": "Rapports médicaux",
+  imagerie: "Imagerie",
+  autre: "Autre",
+};
+
+export const DOC_CATEGORY_COLORS: Record<DocCategory, string> = {
+  "dpi-smeex": "indigo",
+  antecedents: "amber",
+  "rapports-medicaux": "blue",
+  imagerie: "purple",
+  autre: "zinc",
+};
+
+// A single uploaded & processed document in the wizard
+export interface WizardDocument {
+  id: string;
+  fileName: string;
+  fileSize: number;
+  category: DocCategory;
+  status: "classifying" | "extracting" | "done" | "error";
+  extractedFields: number; // how many data points were extracted
+}
+
+// Extracted information organized by section
+export interface ExtractedSection {
+  id: string;
+  title: string;
+  icon: string; // emoji for visual distinction
+  fields: ExtractedField[];
+}
+
+export interface ExtractedField {
+  label: string;
+  value: string;
+  source: string; // which document it came from
+  confidence: "high" | "medium" | "low";
+}
+
+// Mock extracted data that would come from AI processing of uploaded documents
+export const MOCK_EXTRACTED_SECTIONS: ExtractedSection[] = [
+  {
+    id: "patient-info",
+    title: "Informations du patient",
+    icon: "👤",
+    fields: [
+      { label: "Nom", value: "Dupont", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Prénom", value: "Marie", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Date de naissance", value: "12.03.1985", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "N° AVS", value: "756.1234.5678.90", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Adresse", value: "Rue de la Gare 12, 1700 Fribourg", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Profession", value: "Assistante administrative", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Employeur", value: "Fiduciaire Romande SA", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "medium" },
+    ],
+  },
+  {
+    id: "diagnostic",
+    title: "Diagnostic",
+    icon: "🩺",
+    fields: [
+      { label: "Diagnostic principal (CIM-10)", value: "F33.1 — Trouble dépressif récurrent, épisode actuel moyen", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Diagnostic secondaire", value: "F51.0 — Insomnie non organique", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Date du diagnostic", value: "2018", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Diagnostics exclus", value: "Trouble bipolaire, trouble anxieux généralisé, trouble de la personnalité", source: "Bilan_neuropsychologique_2025.pdf", confidence: "high" },
+    ],
+  },
+  {
+    id: "anamnese",
+    title: "Anamnèse",
+    icon: "📋",
+    fields: [
+      { label: "Début des troubles", value: "2018 — trouble dépressif récurrent diagnostiqué, traité initialement par psychothérapie ambulatoire", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Épisode actuel", value: "Novembre 2025 — épisode dépressif majeur entraînant arrêt de travail complet depuis le 15.11.2025", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Évolution", value: "Dégradation progressive depuis septembre 2025 : difficultés de concentration croissantes, fatigue invalidante, troubles du sommeil", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Antécédents familiaux", value: "Mère traitée pour dépression, pas d'antécédents psychiatriques paternels connus", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+    ],
+  },
+  {
+    id: "traitement",
+    title: "Traitement actuel",
+    icon: "💊",
+    fields: [
+      { label: "Médicament", value: "Sertraline 100mg/jour", source: "DPI_Dupont_Marie_SMEEX.xml", confidence: "high" },
+      { label: "Psychothérapie", value: "Suivi hebdomadaire — thérapie cognitivo-comportementale", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Compliance", value: "Bonne — patiente observante au traitement", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+    ],
+  },
+  {
+    id: "limitations",
+    title: "Limitations fonctionnelles",
+    icon: "⚠️",
+    fields: [
+      { label: "Concentration", value: "Limitation sévère — incapacité à maintenir l'attention > 15-20 min sur une tâche cognitive", source: "Bilan_neuropsychologique_2025.pdf", confidence: "high" },
+      { label: "Endurance", value: "Limitation modérée à sévère — fatigabilité accrue nécessitant des pauses fréquentes", source: "Bilan_neuropsychologique_2025.pdf", confidence: "high" },
+      { label: "Adaptabilité", value: "Limitation modérée — difficultés face aux changements et situations imprévues", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Relations interpersonnelles", value: "Limitation légère à modérée — retrait social, capacité préservée de contacts brefs", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Planification", value: "Limitation modérée — difficultés à structurer une journée de travail complète", source: "Bilan_neuropsychologique_2025.pdf", confidence: "high" },
+    ],
+  },
+  {
+    id: "capacite-travail",
+    title: "Capacité de travail",
+    icon: "💼",
+    fields: [
+      { label: "Activité habituelle", value: "50% — mi-temps recommandé (4h/jour, 5 jours/semaine)", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Activité adaptée", value: "60-70% — sans exigence cognitive élevée, avec pauses régulières", source: "Bilan_neuropsychologique_2025.pdf", confidence: "medium" },
+      { label: "Restrictions", value: "Pas de tâches nécessitant concentration soutenue, pas de pression temporelle excessive, environnement calme", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+    ],
+  },
+  {
+    id: "pronostic",
+    title: "Pronostic",
+    icon: "📈",
+    fields: [
+      { label: "Pronostic", value: "Réservé à moyen terme (6-12 mois)", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+      { label: "Facteurs favorables", value: "Compliance thérapeutique, motivation de la patiente, bon fonctionnement prémorbide", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Facteurs défavorables", value: "Récurrence du trouble, durée de l'épisode actuel, persistance des troubles du sommeil", source: "Rapport_Dr_Weber_2024.pdf", confidence: "medium" },
+      { label: "Réévaluation", value: "Recommandée dans 6 mois", source: "Rapport_Dr_Weber_2024.pdf", confidence: "high" },
+    ],
   },
 ];

@@ -49,7 +49,7 @@ export function EmptyState({
       )}
 
       {/* Title + description */}
-      <div className="space-y-2 mb-6">
+      <div className="mb-6 flex flex-col gap-2">
         <h2 className="text-lg font-semibold text-zinc-900">{title}</h2>
         <p className="text-sm text-zinc-600 max-w-md leading-relaxed">
           {description}

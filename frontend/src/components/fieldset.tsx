@@ -80,5 +80,5 @@ export function Field({ className, ...props }: { className?: string } & Omit<Hea
 
 // Visual separator between fields in a form section.
 export function FieldGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
-  return <div data-slot="control" {...props} className={clsx(className, 'space-y-10')} />
+  return <div data-slot="control" {...props} className={clsx(className, 'flex flex-col gap-10')} />
 }

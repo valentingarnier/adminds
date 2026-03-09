@@ -59,7 +59,7 @@ function FormField({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ paddingBottom: "1rem" }}>
+    <div className="pb-4">
       <label className="block text-sm font-medium text-zinc-900">
         {label}
       </label>

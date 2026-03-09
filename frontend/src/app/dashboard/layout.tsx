@@ -1,77 +1,30 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { SidebarLayout } from "@/components/sidebar-layout";
-import {
-  Sidebar,
-  SidebarBody,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarItem,
-  SidebarLabel,
-  SidebarSection,
-  SidebarHeading,
-  SidebarSpacer,
-} from "@/components/sidebar";
-import { Navbar } from "@/components/navbar";
-import { Logo } from "@/components/logo";
-import {
-  UsersIcon,
-  DocumentTextIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/20/solid";
 
-const navItems = [
-  { label: "Patients", href: "/dashboard/patients", icon: UsersIcon },
-  { label: "Modèles", href: "/dashboard/modeles", icon: DocumentTextIcon },
-];
-
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  const sidebarContent = (
-    <Sidebar>
-      <SidebarHeader>
-        <Logo size="md" href="/dashboard" />
-      </SidebarHeader>
-
-      <SidebarBody>
-        <SidebarSection>
-          {navItems.map((item) => (
-            <SidebarItem
-              key={item.href}
-              href={item.href}
-              current={pathname.startsWith(item.href)}
-            >
-              <item.icon />
-              <SidebarLabel>{item.label}</SidebarLabel>
-            </SidebarItem>
-          ))}
-        </SidebarSection>
-
-        <SidebarSpacer />
-
-        <SidebarSection>
-          <SidebarItem href="/dashboard/settings" current={pathname.startsWith("/dashboard/settings")}>
-            <Cog6ToothIcon />
-            <SidebarLabel>Paramètres</SidebarLabel>
-          </SidebarItem>
-        </SidebarSection>
-      </SidebarBody>
-
-      <SidebarFooter>
-        <div className="flex items-center gap-3 px-2">
-          <UserButton appearance={{ elements: { avatarBox: "size-8" } }} />
-          <span className="text-sm text-zinc-600 truncate">Mon compte</span>
-        </div>
-      </SidebarFooter>
-    </Sidebar>
-  );
-
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <SidebarLayout navbar={<Navbar />} sidebar={sidebarContent}>
-      {children}
-    </SidebarLayout>
+    <div className="flex min-h-screen flex-col bg-zinc-100 p-2">
+      <div className="flex flex-1 flex-col rounded-lg bg-white shadow-xs ring-1 ring-zinc-950/5">
+        {/* Page content — grows to push footer down */}
+        <div className="flex-1 p-6 lg:p-10">
+          <div className="mx-auto max-w-5xl">{children}</div>
+        </div>
+
+        {/* Account — always at the bottom */}
+        <div className="border-t border-zinc-950/5 px-6 py-4 lg:px-10">
+          <div className="flex items-center gap-3">
+            <UserButton
+              appearance={{ elements: { avatarBox: "size-8" } }}
+            />
+            <span className="text-sm text-zinc-500">Mon compte</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
