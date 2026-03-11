@@ -1,19 +1,27 @@
 import logging
+import sys
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from loguru import logger
 
 from app.config import settings
 from app.schemas import HealthResponse
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s %(message)s",
-)
-logger = logging.getLogger("app")
+
+# Route standard library logs (uvicorn, langchain, etc.) through loguru for colored output.
+class _InterceptHandler(logging.Handler):
+    def emit(self, record: logging.LogRecord) -> None:
+        level = record.levelname if record.levelname in ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL") else record.levelno
+        logger.opt(depth=6, exception=record.exc_info).log(level, record.getMessage())
+
+
+logging.basicConfig(handlers=[_InterceptHandler()], level=logging.INFO, force=True)
+logger.remove()
+logger.add(sys.stderr, level="INFO", colorize=True)
 
 app = FastAPI(
-    title="My SaaS API",
+    title="Adminds API",
     version="0.1.0",
     docs_url="/docs",
     openapi_url="/openapi.json",
@@ -28,6 +36,7 @@ cors_origins = [
     "http://localhost:3001",
     "http://127.0.0.1:3000",
 ]
+
 
 # Add www variants if the URL is a production domain
 if app_url.startswith("https://") and not app_url.startswith("https://www."):
@@ -52,10 +61,10 @@ async def health() -> HealthResponse:
 
 
 # Register routers
-from app.routers import checkout, hello, users, waitlist, webhooks
+from app.routers import hello
+from app.classification.routes import router as classification_router
+from app.report.routes import router as report_router
 
-app.include_router(hello.router, prefix="/api/v1")
-app.include_router(users.router, prefix="/api/v1")
-app.include_router(checkout.router, prefix="/api/v1")
-app.include_router(webhooks.router, prefix="/api/v1")
-app.include_router(waitlist.router, prefix="/api/v1")
+app.include_router(hello.router, prefix="/api")
+app.include_router(classification_router, prefix="/api")
+app.include_router(report_router, prefix="/api")

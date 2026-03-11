@@ -1,0 +1,117 @@
+"""File-based dossier store.
+
+Each dossier gets a folder: backend/data/dossiers/{uuid}/
+  - dossier.json  — serialized PatientDossier
+  - rapport_ai.docx — generated report (saved after generation)
+  - field_values.json — LLM-generated field values used to fill the report
+
+Replaces the old in-memory dict so dossiers survive server restarts.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from uuid import uuid4
+
+from app.classification.schemas import PatientDossier
+
+# Root directory for all dossier data, next to the app/ package.
+_DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "dossiers"
+
+
+def _dossier_dir(dossier_id: str) -> Path:
+    """Return the folder path for a given dossier UUID."""
+    return _DATA_DIR / dossier_id
+
+
+def _dossier_path(dossier_id: str) -> Path:
+    """Return the JSON file path for a given dossier."""
+    return _dossier_dir(dossier_id) / "dossier.json"
+
+
+def create_dossier(dossier: PatientDossier) -> str:
+    """Store a dossier as JSON on disk and return its UUID."""
+    dossier_id = str(uuid4())
+    folder = _dossier_dir(dossier_id)
+    # Create the folder (and parents like data/dossiers/ on first run).
+    folder.mkdir(parents=True, exist_ok=True)
+    # Write the dossier as JSON.
+    _dossier_path(dossier_id).write_text(
+        dossier.model_dump_json(indent=2), encoding="utf-8"
+    )
+    return dossier_id
+
+
+def get_dossier(dossier_id: str) -> PatientDossier | None:
+    """Read a dossier from disk. Returns None if not found."""
+    path = _dossier_path(dossier_id)
+    if not path.exists():
+        return None
+    return PatientDossier.model_validate_json(path.read_text(encoding="utf-8"))
+
+
+def update_dossier(dossier_id: str, patch: dict) -> PatientDossier | None:
+    """Apply a partial update to a stored dossier and write back to disk.
+
+    Merge logic:
+    - Dict fields (patient_info, rapport_ai_fields): merge keys.
+    - List fields (timeline, medications, diagnostics): replace entirely.
+    - Scalar fields (notes): replace.
+
+    Returns the updated dossier, or None if not found.
+    """
+    existing = get_dossier(dossier_id)
+    if existing is None:
+        return None
+
+    current = existing.model_dump()
+
+    for key, value in patch.items():
+        if value is None:
+            continue
+        # Deep-merge dicts (patient_info, rapport_ai_fields)
+        if isinstance(value, dict) and isinstance(current.get(key), dict):
+            current[key] = {**current[key], **{k: v for k, v in value.items() if v is not None}}
+        else:
+            # Lists and scalars: replace entirely
+            current[key] = value
+
+    updated = PatientDossier.model_validate(current)
+    # Write the updated dossier back to disk.
+    _dossier_path(dossier_id).write_text(
+        updated.model_dump_json(indent=2), encoding="utf-8"
+    )
+    return updated
+
+
+def save_field_values(dossier_id: str, field_values: dict) -> Path:
+    """Save the LLM-generated field values alongside the dossier.
+
+    Returns the file path for logging/reference.
+    """
+    folder = _dossier_dir(dossier_id)
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / "field_values.json"
+    path.write_text(json.dumps(field_values, ensure_ascii=False, indent=2), encoding="utf-8")
+    return path
+
+
+def get_field_values(dossier_id: str) -> dict | None:
+    """Read stored field values from disk. Returns None if not found."""
+    path = _dossier_dir(dossier_id) / "field_values.json"
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_report(dossier_id: str, docx_bytes: bytes) -> Path:
+    """Save a generated .docx report to the dossier's folder.
+
+    Returns the file path for logging/reference.
+    """
+    folder = _dossier_dir(dossier_id)
+    folder.mkdir(parents=True, exist_ok=True)
+    report_path = folder / "rapport_ai.docx"
+    report_path.write_bytes(docx_bytes)
+    return report_path

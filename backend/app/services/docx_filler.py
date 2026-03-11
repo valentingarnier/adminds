@@ -6,14 +6,7 @@ Usage:
 
     filled_bytes = fill_fribourg_template(
         template_path="path/to/fribourg.docx",
-        data={
-            "doctor_name": "Dr Marc Jolivet",
-            "stade_procedure": "Première demande AI",
-            "antecedents_evolution": "Patient suivi depuis...",
-            "a01_choice": "oui",
-            "a01_detail": "Tendance à l'isolement",
-            ...
-        },
+        data={"field_id": "value", ...},
     )
     # filled_bytes is a bytes object containing the filled .docx
 """

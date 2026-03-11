@@ -680,7 +680,7 @@ CLOSING_FIELDS: list[FormField] = [
         field_type=FieldType.TEXT,
         label="Nom, Prénom, adresse exacte (cabinet/service) et signature du médecin",
         section="signature",
-        hint="Ex: 'Dr Marc Jolivet, Cabinet de psychiatrie, Rue de Lausanne 12, 1700 Fribourg'",
+        hint="Nom, titre, adresse du cabinet du médecin signataire",
     ),
     FormField(
         id="annexes",

@@ -1,18 +1,20 @@
 [project]
-name = "my-saas-api"
+name = "adminds-api"
 version = "0.1.0"
-description = "SaaS backend API"
+description = "Adminds backend API"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.34.0",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
-    "httpx>=0.28.0",
-    "cryptography>=44.0.0",
-    "stripe>=11.0.0",
     "python-multipart>=0.0.18",
-    "resend>=2.0.0",
+    "python-docx>=1.1.0",
+    "lxml>=5.0.0",
+    "langchain>=1.0.0",
+    "langchain-openai>=1.1.0",
+    "loguru>=0.7.0",
+    "pymupdf>=1.25.0",
 ]
 
 [project.optional-dependencies]
